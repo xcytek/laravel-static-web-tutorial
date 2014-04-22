@@ -1,0 +1,106 @@
+
+
+<?php $__env->startSection('content'); ?>   
+    <div class="row">
+        <div class="col-md-6">
+             
+            <h2 class="room-title"><?php echo $room1; ?></h2>                       
+            <div class="in-progress-meeting">                
+                <?php foreach ($in_progress_meetings[1] as $m): ?>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="list-group">
+                            <h4 class="list-group-item-heading">                        
+                                <?php echo $m->subject; ?>
+                                <span class="label label-default">Starts at: <?php echo $m->start_datetime; ?> </span>
+                            </h4>
+                            <h3><span id="status-room1" class="label label-success">In progress</span></h3>
+                            <span>What is this meeting about?</span>
+                            <pre><p class="list-group-item-text"><?php echo $m->notes; ?></p></pre>
+                        </div>
+                        
+                        <?php                                      
+                            $now = date('Y-m-d h:i:s'); 
+                            $date  = strtotime($m->start_datetime); 
+                            $date2 = strtotime($now) ; 
+                            $interval = (round(abs($date - $date2) / 60, 0));
+                        ?>                
+                        Duration: <span id="duration" class="pb-room1"><?php echo $m->duration; ?></span> Minutes
+                        <div id="progress-bar" class="progress  progress-striped <?php echo ($interval==$m->duration)?'success':'active'; ?>" style="width:80%; margin:20px auto;">
+                            <div id="progress-bar-room1" class="progress-bar" role="progressbar" aria-valuenow="<?php echo $interval; ?>" 
+                                aria-valuemin="0" aria-valuemax="<?php echo $m->duration; ?>" style="width: <?php echo ($interval * 100 / $m->duration); ?>%;">
+                                <span id="running" class="pb-room1"><?php echo $interval; ?></span> Minutes Running
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>                
+            </div>            
+            <h3 style="text-align:center;"><span class="label label-primary" >Coming Up Meetings</span></h3>
+            
+            <div class="reservation-list">    
+                <?php foreach ($coming_meetings_rooms[1] as $m): ?>
+                <div class="list-group">
+                    <h4 class="list-group-item-heading">                        
+                        <?php echo $m->subject; ?>
+                        <span class="label label-default">Starts at: <?php echo $m->start_datetime; ?> </span>
+                    </h4>
+                    <p class="list-group-item-text"><?php echo $m->notes; ?></p>
+                </div>
+                <?php endforeach; ?>                              
+            </div>
+        
+        </div>
+        
+        <div class="col-md-6">
+            <h2 class="room-title"><?php echo $room2; ?></h2>                        
+            <div class="in-progress-meeting">
+                 <?php foreach ($in_progress_meetings[2] as $m): ?>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="list-group">
+                                <h4 class="list-group-item-heading">                        
+                                    <?php echo $m->subject; ?>
+                                    <span class="label label-default">Starts at: <?php echo $m->start_datetime; ?> </span>
+                                </h4>
+                                <h3><span id="status-room2" class="label label-success">In progress</span></h3>
+                                <span>What is this meeting about?</span>
+                                <pre><p class="list-group-item-text"><?php echo $m->notes; ?></p></pre>
+                            </div>
+                            
+                            <?php                                      
+                                $now = date('Y-m-d h:i:s'); 
+                                $date  = strtotime($m->start_datetime); 
+                                $date2 = strtotime($now) + 18000; 
+                                $interval = (round(abs($date - $date2) / 60, 0));
+                            ?>                
+                            Duration: <span id="duration" class="pb-room2"><?php echo $m->duration; ?></span> Minutes
+                            <div id="progress-bar" class="progress  progress-striped <?php echo ($interval==$m->duration)?'success':'active'; ?>" style="width:80%; margin:20px auto;">
+                                <div id="progress-bar-room2" class="progress-bar" role="progressbar" aria-valuenow="<?php echo $interval; ?>" 
+                                    aria-valuemin="0" aria-valuemax="<?php echo $m->duration; ?>" style="width: <?php echo ($interval * 100 / $m->duration); ?>%;">
+                                    <span id="running" class="pb-room2"><?php echo $interval; ?></span> Minutes Running
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            
+            <h3 style="text-align:center;"><span class="label label-primary">Coming Up Meetings</span></h3>
+            
+            <div class="reservation-list">    
+                <?php foreach ($coming_meetings_rooms[2] as $m): ?>
+                <div class="list-group">
+                    <h4 class="list-group-item-heading">                        
+                        <?php echo $m->subject; ?>
+                        <span class="label label-default">Starts at: <?php echo $m->start_datetime; ?> </span>
+                    </h4>
+                    <p class="list-group-item-text"><?php echo $m->notes; ?></p>
+                </div>
+                <?php endforeach; ?>                
+            </div>
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

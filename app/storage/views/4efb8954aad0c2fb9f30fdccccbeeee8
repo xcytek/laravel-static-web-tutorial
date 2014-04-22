@@ -1,0 +1,80 @@
+
+
+<?php $__env->startSection('content'); ?>
+	<?php if (Auth::user()->type == 'admin'): ?>
+        <table class="table table-striped">
+            <tr>
+                <th>#</th>
+                <th>Meeting Room</th>            
+                <th>Subject</th> 
+                <th>Start at</th> 
+                <th>Duration</th> 
+                <th></th>
+            </tr>
+            
+            <?php foreach($reservations as $reservation): ?>
+                <tr>
+                    <td><?php echo $reservation->id; ?></td>
+                    <td><?php echo $reservation->id_room; ?></td>
+                    <td><?php echo $reservation->subject; ?></td>                
+                    <td><?php echo $reservation->start_datetime; ?></td>                
+                    <td><?php echo $reservation->duration; ?> minutes</td>
+                    <td><?php echo link_to('/reservations/delete/'.$reservation->id, 'delete',  $attributes = array('class'=>'btn btn-danger'), $secure = null); ?></td>
+                </tr>
+            <?php endforeach; ?>
+        </table>
+    
+    <?php echo $reservations->links(); ?>
+    
+    <br /><hr /><br />
+	<?php endif; ?>
+	<div class="panel panel-default">
+        <div class="panel-heading">New Reservation</div>
+        <div class="panel-body">
+            <form action="reservations/save" method="POST" class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="room" class="col-sm-2 control-label">Meeting Room</label>
+                    <div class="col-sm-10">
+                        <select name="room" class="form-control">
+                            <option value="-">-- Select Meeting Room --</option>
+                            <?php foreach ($rooms as $room): ?>
+                                <option value="<?php echo $room->id; ?>"><?php echo $room->name; ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="start" class="col-sm-2 control-label">Start</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="datetimepicker" name="start" placeholder="Select Date and Time" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="duration" class="col-sm-2 control-label">Duration</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="duration" name="duration" placeholder="Duration in minutes">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="subject" class="col-sm-2 control-label">Subject</label>
+                    <div class="col-sm-10">
+                        <input type="subject" class="form-control" id="subject" name="subject" placeholder="Subject">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="notes" class="col-sm-2 control-label">Notes</label>
+                    <div class="col-sm-10">
+                        <textarea class="form-control" name="notes"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,12 @@
+
+
+<?php $__env->startSection('content'); ?>
+	
+	<div class="jumbotron">
+		<h1>Hello Laravel world!</h1>
+	  	<p>Welcome to My Static Website builded with Laravel</p>
+	  	<p><a class="btn btn-primary btn-lg" role="button">Learn more</a></p>
+	</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -1,0 +1,13 @@
+
+<?php $__env->startSection('content'); ?>
+	
+	<div id="dashboard-menu">
+		<ul class="list-group">
+			<li class="list-group-item"><?php echo link_to('/reservations', 'Reservations'); ?></li>
+			<li class="list-group-item"><?php echo link_to('/users', 'Users'); ?></li>
+			<li class="list-group-item"><?php echo link_to('/rooms', 'Rooms'); ?></li>			
+		</ul>
+	</div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('layout', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
